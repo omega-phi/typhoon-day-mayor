@@ -66,3 +66,37 @@ npm run start
   
 欲進行測試的可以使用的帳號密碼：
 - 帳號 / 密碼（已解鎖全部遊戲進度）： demo / 123
+
+7. Docker
+
+在使用 docker 之前需要先安裝 docker 有沒有安裝好，如果是 GCP 可以按照這篇教學安裝
+
+https://forum.gamer.com.tw/C.php?bsn=71458&snA=485
+
+dockerfile 有指定環境變數是 NODE_ENV 是 production，
+Build image 之前，要記得改 config.json 當中 production DB 的設定
+
+build image，在 GCP 最低資源的 vm，第一次跑大概要跑 10 分鐘。
+
+```
+sudo docker build -t typhoon_day .
+```
+
+確認有沒有將 image build 出來
+
+```
+sudo docker images
+```
+
+run image
+
+```
+sudo docker run -d --env-file .env -p 3333:3333 --network="host" --name typhoon_day typhoon_day
+```
+```--network="host"``` 讓跑起來的 image 可以連到 localhost DB，只在 linux 環境有用
+
+確認執行狀態
+
+```
+sudo docker ps -a
+```
