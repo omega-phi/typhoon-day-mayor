@@ -24,6 +24,8 @@ router.post('/signin', userController.signIn)
 
 router.get('/mainScreen', commentController.mainScreen)
 router.get('/weather', weatherController.allWeatherDatas)
+router.get('/typhoonPredict', weatherController.typhoonPredictData)
+router.get('/typhoonActual', weatherController.typhoonActualData)
 
 router.get('/unlockableEndings', unlockableEndingController.allUnlockableEndings)
 router.get('/definitions', definitionController.allDefinitions)

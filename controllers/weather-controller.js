@@ -2,6 +2,7 @@ const { Weather } = require('../models')
 const { Op } = require('sequelize')
 
 const { currentTaipeiTime } = require('../helpers/time-helpers')
+const { typhoonData } = require('../mockData/typhoonMockData')
 
 module.exports = {
   allWeatherDatas: async (req, res, next) => {
@@ -43,6 +44,31 @@ module.exports = {
         data.警報結束 = currentTaipeiTime(data.警報結束)
         return data
       })
+      res.json({ status: 'success', data })
+    } catch (err) {
+      next(err)
+    }
+  },
+  typhoonPredictData: async (req, res, next) => {
+    try {
+      const { query: { reqId } } = req
+      const typhoonId = reqId? reqId : Math.floor(Math.random() * typhoonData.length)
+      const data = {
+        'id': typhoonData[typhoonId].id,
+        'name': typhoonData[typhoonId].name,
+        'data': typhoonData[typhoonId].data,
+        'predictData': typhoonData[typhoonId].predictData
+      }
+      res.json({ status: 'success', data })
+    } catch (err) {
+      next(err)
+    }
+  },
+  typhoonActualData: async (req, res, next) => {
+    try {
+      const { query: { reqId } } = req
+      const typhoonId = reqId? reqId : Math.floor(Math.random() * typhoonData.length)
+      const data = { ...typhoonData[typhoonId] }
       res.json({ status: 'success', data })
     } catch (err) {
       next(err)
