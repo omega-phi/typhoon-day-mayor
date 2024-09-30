@@ -51,25 +51,35 @@ module.exports = {
   },
   typhoonPredictData: async (req, res, next) => {
     try {
-      const { query: { reqId } } = req
-      const typhoonId = reqId? reqId : Math.floor(Math.random() * typhoonData.length)
-      const data = {
-        'id': typhoonData[typhoonId].id,
-        'name': typhoonData[typhoonId].name,
-        'data': typhoonData[typhoonId].data,
-        'predictData': typhoonData[typhoonId].predictData
+      const { query: { id } } = req
+      const typhoonId = id? id : Math.floor(Math.random() * typhoonData.length)
+      if(typhoonData[typhoonId]){
+        const data = {
+          'id': typhoonData[typhoonId].id,
+          'name': typhoonData[typhoonId].name,
+          'data': typhoonData[typhoonId].data,
+          'predictData': typhoonData[typhoonId].predictData
+        }
+        res.json({ status: 'success', data })
+      } else {
+        res.status(404)
+        res.json({ status: 'fail', message: 'typhoon id not found' })
       }
-      res.json({ status: 'success', data })
     } catch (err) {
       next(err)
     }
   },
   typhoonActualData: async (req, res, next) => {
     try {
-      const { query: { reqId } } = req
-      const typhoonId = reqId? reqId : Math.floor(Math.random() * typhoonData.length)
-      const data = { ...typhoonData[typhoonId] }
-      res.json({ status: 'success', data })
+      const { query: { id } } = req
+      const typhoonId = id? id : Math.floor(Math.random() * typhoonData.length)
+      if(typhoonData[typhoonId]){
+        const data = { ...typhoonData[typhoonId] }
+        res.json({ status: 'success', data })
+      } else {
+        res.status(404)
+        res.json({ status: 'fail', message: 'typhoon id not found' })
+      }
     } catch (err) {
       next(err)
     }
