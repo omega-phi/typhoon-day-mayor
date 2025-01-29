@@ -100,3 +100,26 @@ sudo docker run -d --env-file .env -p 3333:3333 --network="host" --name typhoon_
 ```
 sudo docker ps -a
 ```
+
+8. nginx + SSL 
+
+nginx 安裝
+
+```
+sudo apt install nginx
+```
+
+查看 nginx 狀態
+
+```
+systemctl status nginx
+```
+
+複製 config 過去
+
+```
+cp nginx/default.conf /etc/nginx/conf.d/default.conf
+```
+
+參考這個網頁安裝 certbot
+https://certbot.eff.org/instructions?ws=nginx&os=snap
