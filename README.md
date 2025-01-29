@@ -115,8 +115,11 @@ sudo apt install nginx
 systemctl status nginx
 ```
 
-複製 config 過去
+參考這個網頁安裝 certbot
+https://certbot.eff.org/instructions?ws=nginx&os=snap
 
+
+複製 config 過去
 ```
 cp nginx/default.conf /etc/nginx/conf.d/default.conf
 ```
@@ -127,5 +130,5 @@ cp nginx/default.conf /etc/nginx/conf.d/default.conf
 nginx -s reload
 ```
 
-參考這個網頁安裝 certbot
-https://certbot.eff.org/instructions?ws=nginx&os=snap
+有預算的話，可以不使用 certbot，參考這個教學使用 GCP load balancer
+https://medium.com/%E5%B7%A5%E7%A8%8B%E9%9A%A8%E5%AF%AB%E7%AD%86%E8%A8%98/gcp-vm-%E8%A8%AD%E5%AE%9A-https-%E5%8F%8A-ssl-41c2406afad4
