@@ -121,5 +121,11 @@ systemctl status nginx
 cp nginx/default.conf /etc/nginx/conf.d/default.conf
 ```
 
+重啟 nginx
+
+```
+nginx -s reload
+```
+
 參考這個網頁安裝 certbot
 https://certbot.eff.org/instructions?ws=nginx&os=snap
